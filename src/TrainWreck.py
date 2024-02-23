@@ -110,8 +110,10 @@ ttr = pd.DataFrame.from_dict(ttr, orient='index')
 import matplotlib
 import numpy as np
 for key in ttf.index:
+    print(key)
     ttf_ = ttf.loc[key]
     if len(ttf_) > 0:
+        print(ttf_.describe())
         ttf_.hist(bins=50)
         plt.title('Histogram of' + key)
         plt.xlabel('Time to failure (ttf)')
@@ -120,6 +122,7 @@ for key in ttf.index:
 
     ttr_ = ttr.loc[key]
     if len(ttr_) > 0:
+        print(ttr_.describe())
         ttr_.hist(bins=50)
         plt.title('Histogram of' + key)
         plt.xlabel('Time to repair (ttr)')
