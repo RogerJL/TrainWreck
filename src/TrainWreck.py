@@ -129,8 +129,8 @@ for key in ttf.index:
         plt.show()
 
 
+# from https://thecleverprogrammer.com/2021/11/11/word-cloud-from-a-pandas-dataframe-in-python/#google_vignette
 from wordcloud import WordCloud
-from wordcloud import ImageColorGenerator
 import matplotlib.pyplot as plt
 import pandas as pd
 
