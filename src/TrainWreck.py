@@ -110,13 +110,34 @@ ttr = pd.DataFrame.from_dict(ttr, orient='index')
 import matplotlib
 import numpy as np
 for key in ttf.index:
-    ttf.loc[key].hist(bins=50)
-    plt.title('Histogram of' + key)
-    plt.xlabel('Time to failure (ttf)')
-    plt.show()
+    ttf_ = ttf.loc[key]
+    if len(ttf_) > 0:
+        ttf_.hist(bins=50)
+        plt.title('Histogram of' + key)
+        plt.xlabel('Time to failure (ttf)')
+        plt.show()
 
 
-    ttr.loc[key].hist(bins=50)
-    plt.title('Histogram of' + key)
-    plt.xlabel('Time to repair (ttr)')
-    plt.show()
+    ttr_ = ttr.loc[key]
+    if len(ttr_) > 0:
+        ttr_.hist(bins=50)
+        plt.title('Histogram of' + key)
+        plt.xlabel('Time to repair (ttr)')
+        plt.show()
+
+
+from wordcloud import WordCloud
+from wordcloud import ImageColorGenerator
+import matplotlib.pyplot as plt
+import pandas as pd
+
+text = " ".join(i for i in data['Damage description'] if isinstance(i, str))
+with open("./data/stopwords.txt", 'rt') as sw:
+    lines = sw.read().splitlines()
+    stopwords = set(lines)
+wordcloud = WordCloud(stopwords=stopwords, background_color="white", random_state=42).generate(text)
+plt.figure( figsize=(15,10))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+plt.savefig("./data/wordcloud.png")
+plt.show()
